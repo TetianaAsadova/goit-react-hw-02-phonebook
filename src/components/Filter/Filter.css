@@ -1,4 +1,4 @@
-.ContactList {
+.filter {
     display: block;
     width: 400px;
     margin-left: auto;
@@ -7,11 +7,11 @@
     color: #010101
 }
 
-.ContactList__item {
-    display: flex;
-    align-items: center;
+.filter__name {
+    font-size: 30px;
+    font-weight: 600;
 }
 
-.ContactList__text {
-    margin-right: 10px;
+.filter__filter {
+    margin-bottom: 0;
 }

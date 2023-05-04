@@ -1,30 +1,34 @@
 import React, { Component } from "react";
-import './ContactEditor.css';
+import './ContactForm.css';
 
-class ContactEditor extends Component {
+class ContactForm extends Component {
     state = {
         text: '',
+        phone: ''
     };
 
     handleChange = event => {
         this.setState({ text: event.currentTarget.value });
     };
 
+    handleChangeNumber = event => {
+        this.setState({ phone: event.currentTarget.value });
+    };
+
     handleSubmit = event => {
         event.preventDefault();
         console.log(`this.state`, this.state);
-        this.props.onSubmitEditor(this.state.text);
+        this.props.onSubmitEditor(this.state);
         this.reset();
     }
 
     reset = () => {
-        this.setState({ text: '' });
+        this.setState({ text: '', phone: '' });    
     }
 
     render() {
         return (
             <div className="ContactEditor">
-                <p className="ContactEditor__text">Phonebook</p>
                 <form className="ContactEditor__form" onSubmit={this.handleSubmit}>
                     <label className="ContactEditor__label" htmlFor="">
                         <p className="ContactEditor__name">Name</p>
@@ -38,25 +42,24 @@ class ContactEditor extends Component {
                             required
                         /> 
                     </label>
+                    <label className="ContactEditor__label" htmlFor="">
+                        <p className="ContactEditor__name">Number</p>
+                        <input
+                            type="tel"
+                            value={this.state.phone}
+                            onChange={this.handleChangeNumber}
+                            name="number"
+                            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                            required
+                        />
+                    </label>
                     <button type="submit">Add contact</button>
                 </form>
             </div>
-             
-
-            // <form className="ContactEditor" onSubmit={this.handleSubmit}>
-            //     Name  
-            //     <textarea
-            //         className="ContactEditor__textsrea"
-            //         value={this.setState.text}
-            //         onChange={this.handleChange}
-            //     ></textarea>
-            //     <button type="submit" className="ContactEditor__button">
-            //         Add contact
-            //     </button>
-            // </form>
         );
     }
 
 }
 
-export default ContactEditor;
+export default ContactForm;
