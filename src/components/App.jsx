@@ -20,18 +20,29 @@ class App extends Component {
     console.log(`text`, text);
     console.log(`phone`, phone);
 
-    // colorPickerOptions.find(option => option.label === "blue");
     const contact = {
       id: nanoid(),
       name: text,
       number: phone, 
     };
-    console.log(`contact`, contact);
+    console.log(`contact1`, contact);
+    const textName = text.toLowerCase();
+    console.log(`i=`, this.state.contacts.length);
+    for (let i = 0; i < this.state.contacts.length; i = + 1) {
+      if (this.state.contacts[i].name.toLowerCase() === textName) {
+        alert(`${text} is already in contacts.`);
+        return;
+      } else {
+        console.log(`contact2`, contact);
 
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
-    }));
-    console.log(`contactsAdd`, this.state)
+        this.setState(prevState => ({
+          contacts: [contact, ...prevState.contacts],
+        }));
+        console.log(`contactsAdd`, this.state);
+    
+        return;
+      }
+    }
   }
 
   changeFilter = event => {
@@ -40,13 +51,22 @@ class App extends Component {
   }
 
   getVisibleContacts = () => {
-    const normalizedFilter = this.state.filter.toLowerCase();
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
 
-    return this.state.contacts.filter(contact =>
-      contact.text.toLowerCase().includes(normalizedFilter),
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
     );
   }
-  
+
+  getConstVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    if (filter.trim() === '') {
+      return contacts;
+    } else {
+      return this.getVisibleContacts();
+    };
+  }
 
   deliteContact = contactId => {
     this.setState(prevState => ({
@@ -55,9 +75,8 @@ class App extends Component {
   }
   
   render() {
-    const { filter } = this.state;
-  
-    // const visibleContacts = this.getVisibleContacts();
+    const { filter } = this.state;  
+    const visibleContacts = this.getConstVisibleContacts();
     return (
       <div className='App'>
         <h1>Phonebook</h1>
@@ -68,8 +87,8 @@ class App extends Component {
 
         <Filter value={filter} changeFilter={this.changeFilter} />
 
-        <ContactList contacts={this.state.contacts} onDeliteContact={this.deliteContact}/>
-        {/* <ContactList contacts={visibleContacts} /> */}
+        {/* <ContactList contacts={this.state.contacts} onDeliteContact={this.deliteContact}/> */}
+        <ContactList contacts={visibleContacts} onDeliteContact={this.deliteContact}/>
 
       </div>
     );

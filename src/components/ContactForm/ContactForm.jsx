@@ -15,15 +15,15 @@ class ContactForm extends Component {
         this.setState({ phone: event.currentTarget.value });
     };
 
+    reset = () => {
+        this.setState({ text: '', phone: '' });    
+    }
+
     handleSubmit = event => {
         event.preventDefault();
         console.log(`this.state`, this.state);
         this.props.onSubmitEditor(this.state);
         this.reset();
-    }
-
-    reset = () => {
-        this.setState({ text: '', phone: '' });    
     }
 
     render() {
