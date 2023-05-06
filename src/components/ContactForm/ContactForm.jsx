@@ -21,7 +21,7 @@ class ContactForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        console.log(`this.state`, this.state);
+        // console.log(`this.state`, this.state);
         this.props.onSubmitEditor(this.state);
         this.reset();
     }
@@ -61,5 +61,7 @@ class ContactForm extends Component {
     }
 
 }
+
+
 
 export default ContactForm;

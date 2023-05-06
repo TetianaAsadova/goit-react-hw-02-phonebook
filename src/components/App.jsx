@@ -17,28 +17,28 @@ class App extends Component {
   }
 
   addContact = ({ text, phone }) => {
-    console.log(`text`, text);
-    console.log(`phone`, phone);
+    // console.log(`text`, text);
+    // console.log(`phone`, phone);
 
     const contact = {
       id: nanoid(),
       name: text,
       number: phone, 
     };
-    console.log(`contact1`, contact);
+    // console.log(`contact1`, contact);
     const textName = text.toLowerCase();
-    console.log(`i=`, this.state.contacts.length);
+    // console.log(`i=`, this.state.contacts.length);
     for (let i = 0; i < this.state.contacts.length; i = + 1) {
       if (this.state.contacts[i].name.toLowerCase() === textName) {
         alert(`${text} is already in contacts.`);
         return;
       } else {
-        console.log(`contact2`, contact);
+        // console.log(`contact2`, contact);
 
         this.setState(prevState => ({
           contacts: [contact, ...prevState.contacts],
         }));
-        console.log(`contactsAdd`, this.state);
+        // console.log(`contactsAdd`, this.state);
     
         return;
       }
@@ -47,7 +47,7 @@ class App extends Component {
 
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
-    console.log(`filter`, this.state.filter);
+    // console.log(`filter`, this.state.filter);
   }
 
   getVisibleContacts = () => {
