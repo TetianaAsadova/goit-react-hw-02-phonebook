@@ -27,22 +27,39 @@ class App extends Component {
     };
     // console.log(`contact1`, contact);
     const textName = text.toLowerCase();
-    // console.log(`i=`, this.state.contacts.length);
-    for (let i = 0; i < this.state.contacts.length; i = + 1) {
-      if (this.state.contacts[i].name.toLowerCase() === textName) {
-        alert(`${text} is already in contacts.`);
-        return;
-      } else {
-        // console.log(`contact2`, contact);
-
-        this.setState(prevState => ({
-          contacts: [contact, ...prevState.contacts],
-        }));
-        // console.log(`contactsAdd`, this.state);
+    console.log(`textName`, textName);
     
-        return;
-      }
+
+    const hasName = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === textName
+    );
+    if (hasName) {
+      alert(`${text} is already in contacts.`);
+      return;
     }
+
+    this.setState(prevState => ({
+      contacts: [contact, ...prevState.contacts],
+    }));
+
+    console.log(`contactsAdd`, this.state);
+
+    // // console.log(`i=`, this.state.contacts.length);
+    // for (let i = 0; i < this.state.contacts.length; i = + 1) {
+    //   if (this.state.contacts[i].name.toLowerCase() === textName) {
+    //     alert(`${text} is already in contacts.`);
+    //     return;
+    //   } else {
+    //     // console.log(`contact2`, contact);
+
+    //     this.setState(prevState => ({
+    //       contacts: [contact, ...prevState.contacts],
+    //     }));
+    //     // console.log(`contactsAdd`, this.state);
+    
+    //     return;
+    //   }
+    // }
   }
 
   changeFilter = event => {
